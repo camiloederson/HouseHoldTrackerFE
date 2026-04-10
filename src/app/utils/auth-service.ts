@@ -9,6 +9,11 @@ import { environment } from '../../environment';
   providedIn: 'root',
 })
 export class AuthService {
+
+  constructor(){
+    console.log('API URL:', environment.apiUrl);
+  }
+
   private readonly apiUrl = `${environment.apiUrl}/auth`;
   httpClient = inject(HttpClient);
   private readonly tokenKey = 'ht_token';
@@ -23,6 +28,7 @@ export class AuthService {
   getToken(): string | null {
     return localStorage.getItem(this.tokenKey);
   }
+
 
   private storeSession(response: LoginResponseDTO): void {
     localStorage.setItem(this.tokenKey, response.token);
