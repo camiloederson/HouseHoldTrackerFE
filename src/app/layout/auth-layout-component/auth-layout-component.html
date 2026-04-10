@@ -1,0 +1,41 @@
+<div class="min-h-screen bg-[#fafafa] font-main">
+  <div class="flex min-h-screen">
+    
+    <div class="hidden lg:flex lg:w-1/2 flex-col justify-between p-12 bg-white border-r border-zinc-200">
+      <div>
+        <div class="flex items-center gap-3 mb-12">
+          <div class="h-10 w-10 rounded-xl bg-indigo-600 flex items-center justify-center text-white shadow-sm">
+            <span class="font-bold text-lg">H</span>
+          </div>
+          <span class="text-xl font-semibold tracking-tight text-zinc-900">Household Tracker</span>
+        </div>
+
+        <div class="max-w-md">
+          <h1 class="text-4xl font-bold tracking-tight text-zinc-950 leading-tight">
+            <span class="text-indigo-600">Beware of</span> little expenses.
+          </h1>
+          <p class="mt-6 text-lg text-zinc-500 leading-relaxed">
+            Manage your monthly budgets, track every expense, and organize your categories in a clean, distraction-free workspace.
+          </p>
+        </div>
+      </div>
+
+      <div class="rounded-2xl bg-zinc-50 border border-zinc-200 p-6 shadow-sm">
+        <div class="flex items-center gap-4">
+          <div class="h-1 w-12 rounded-full bg-indigo-600"></div>
+          <p class="text-sm font-medium text-zinc-900 uppercase tracking-wider">PWA Powered</p>
+        </div>
+        <p class="mt-3 text-sm leading-6 text-zinc-600">
+          Install this app on your phone for a seamless, native experience—completely free and always synced.
+        </p>
+      </div>
+    </div>
+
+    <div class="w-full lg:w-1/2 flex items-center justify-center p-6 sm:p-12 lg:p-16">
+      <div class="w-full max-w-sm">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,143 @@
+<div class="space-y-6" *ngIf="!loading && monthlyBudgetDetail as budget">
+  <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+    <div>
+      <div class="flex items-center gap-3">
+        <a
+          routerLink="/monthly-budgets"
+          class="inline-flex items-center text-sm text-zinc-500 hover:text-zinc-700 transition-colors"
+        >
+          ← Back
+        </a>
+      </div>
+
+      <h1 class="text-2xl font-bold text-zinc-900 tracking-tight mt-2">
+        Monthly Budget Detail
+      </h1>
+      <p class="text-sm text-zinc-500 mt-1">
+        {{ getMonthName(budget.month) }} {{ budget.year }} - {{ budget.householdName }}
+      </p>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+    <div class="rounded-xl border border-zinc-200 bg-white p-5 shadow-sm">
+      <p class="text-xs font-semibold uppercase tracking-wide text-zinc-500">Planned Amount</p>
+      <p class="mt-2 text-2xl font-bold text-indigo-600">${{ budget.plannedAmount }}</p>
+    </div>
+
+    <div class="rounded-xl border border-zinc-200 bg-white p-5 shadow-sm">
+      <p class="text-xs font-semibold uppercase tracking-wide text-zinc-500">Total Allocated</p>
+      <p class="mt-2 text-2xl font-bold text-zinc-900">${{ budget.totalAllocated }}</p>
+    </div>
+
+    <div class="rounded-xl border border-zinc-200 bg-white p-5 shadow-sm">
+      <p class="text-xs font-semibold uppercase tracking-wide text-zinc-500">Total Spent</p>
+      <p class="mt-2 text-2xl font-bold text-red-600">${{ budget.totalSpent }}</p>
+    </div>
+
+    <div class="rounded-xl border border-zinc-200 bg-white p-5 shadow-sm">
+      <p class="text-xs font-semibold uppercase tracking-wide text-zinc-500">Total Available</p>
+      <p class="mt-2 text-2xl font-bold text-emerald-600">${{ budget.totalAvailable }}</p>
+    </div>
+  </div>
+
+  <div class="overflow-hidden border border-zinc-200 rounded-xl bg-white shadow-sm">
+    <div class="px-6 py-4 border-b border-zinc-200 bg-zinc-50/50 flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <h2 class="text-sm font-bold uppercase tracking-wider text-zinc-700">
+        Category Breakdown
+      </h2>
+
+      <div class="flex flex-wrap items-center gap-2">
+        <button 
+          (click)="setFilter('all')"
+          [class]="currentFilter === 'all' ? 'bg-zinc-900 text-white' : 'bg-zinc-100 text-zinc-600 hover:bg-zinc-200'"
+          class="px-3 py-1 text-xs font-semibold rounded-lg transition-colors">
+          All
+        </button>
+        <button 
+          (click)="setFilter('available')"
+          [class]="currentFilter === 'available' ? 'bg-emerald-600 text-white' : 'bg-emerald-50 text-emerald-600 hover:bg-emerald-100'"
+          class="px-3 py-1 text-xs font-semibold rounded-lg transition-colors">
+          Pending
+        </button>
+        <button 
+          (click)="setFilter('completed')"
+          [class]="currentFilter === 'completed' ? 'bg-blue-600 text-white' : 'bg-blue-50 text-blue-600 hover:bg-blue-100'"
+          class="px-3 py-1 text-xs font-semibold rounded-lg transition-colors">
+          Completed
+        </button>
+        <button 
+          (click)="setFilter('overspent')"
+          [class]="currentFilter === 'overspent' ? 'bg-rose-600 text-white' : 'bg-rose-50 text-rose-600 hover:bg-rose-100'"
+          class="px-3 py-1 text-xs font-semibold rounded-lg transition-colors">
+          Overspent
+        </button>
+      </div>
+    </div>
+
+    <div class="overflow-x-auto">
+      <table class="w-full text-left border-collapse">
+        <thead>
+          <tr class="bg-zinc-50/50 border-b border-zinc-200">
+            <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-zinc-500">Category</th>
+            <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-zinc-500 text-right">Allocated</th>
+            <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-zinc-500 text-right">Spent So Far</th>
+            <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-zinc-500 text-right">Available</th>
+          </tr>
+        </thead>
+
+        <tbody class="divide-y divide-zinc-100">
+          <tr
+            *ngFor="let category of filteredCategories"
+            class="hover:bg-zinc-50/50 transition-colors"
+          >
+            <td class="px-6 py-2">
+              <div class="text-sm font-semibold text-zinc-900">
+                {{ category.name }}
+              </div>
+            </td>
+
+            <td class="px-6 py-2 text-right">
+              <span class="text-sm font-mono font-semibold text-zinc-600">
+                ${{ category.allocatedAmount }}
+              </span>
+            </td>
+
+            <td class="px-6 py-2 text-right">
+              <span class="text-sm font-mono font-semibold text-zinc-500">
+                ${{ category.spentSoFar }}
+              </span>
+            </td>
+
+            <td class="px-6 py-2 text-right">
+              <span
+                class="text-xs font-bold px-2.5 py-1 rounded-full border"
+                [ngClass]="{
+                  'bg-blue-50 text-blue-600 border-blue-100': category.available === 0,
+                  'bg-emerald-50 text-emerald-600 border-emerald-100': category.available > 0,
+                  'bg-rose-50 text-rose-600 border-rose-100': category.available < 0
+                }"
+              >
+                ${{ category.available }}
+              </span>
+            </td>
+          </tr>
+
+          <tr *ngIf="filteredCategories.length === 0">
+            <td colspan="4" class="px-6 py-10 text-center text-sm text-zinc-500 italic">
+              No categories found for the "{{ currentFilter }}" status.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="loading" class="rounded-xl border border-zinc-200 bg-white p-6 shadow-sm">
+  <p class="text-sm text-zinc-500">Loading monthly budget detail...</p>
+</div>
+
+<div *ngIf="!loading && errorMessage" class="rounded-xl border border-red-200 bg-red-50 p-6 shadow-sm">
+  <p class="text-sm text-red-600">{{ errorMessage }}</p>
+</div>

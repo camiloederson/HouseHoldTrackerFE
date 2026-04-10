@@ -1,1 +1,85 @@
-/* You can add global styles to this file, and also import other style files */
+@import "tailwindcss";
+
+/* MODERN DESIGN TOKENS */
+:root {
+  /* Colors - Zinc Palette */
+  --color-bg: #fafafa;
+  --color-surface: #ffffff;
+  --color-primary: #4f46e5;       /* Indigo 600 */
+  --color-primary-hover: #4338ca; /* Indigo 700 */
+  
+  --color-text-main: #09090b;     /* Zinc 950 */
+  --color-text-muted: #71717a;    /* Zinc 500 */
+  --color-border: #e4e4e7;        /* Zinc 200 */
+  --color-input-bg: #ffffff;
+
+  /* Typography */
+  --font-main: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+/* GLOBAL RESET & BASE */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-main);
+  background-color: var(--color-bg);
+  color: var(--color-text-main);
+}
+
+/* CUSTOM UTILITIES */
+.bg-app-minimal {
+  background-color: var(--color-bg);
+}
+
+.card-minimal {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 1rem;
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+}
+
+.input-minimal {
+  width: 100%;
+  padding: 0.625rem 1rem;
+  background-color: var(--color-input-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  transition: all 0.2s ease;
+  color: var(--color-text-main);
+}
+
+.input-minimal:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1);
+}
+
+.btn-primary {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.625rem 1.25rem;
+  background-color: var(--color-primary);
+  color: white;
+  font-weight: 600;
+  font-size: 0.875rem;
+  border-radius: 0.5rem;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+.btn-primary:hover {
+  background-color: var(--color-primary-hover);
+  transform: translateY(-1px);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}

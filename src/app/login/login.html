@@ -1,0 +1,57 @@
+<div
+  class="min-h-screen flex flex-col justify-center py-12 sm:px-6 lg:px-8 bg-app-minimal"
+>
+  <div class="sm:mx-auto sm:w-full sm:max-w-md">
+          <h1 class="text-4xl font-bold tracking-tight text-zinc-950 leading-tight">
+            <span class="text-indigo-600">Household</span>Tracker
+          </h1>
+  </div>
+
+  <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+    <div class="card-minimal py-8 px-4 sm:px-10">
+      <form [formGroup]="loginForm" (ngSubmit)="submit()" class="space-y-6">
+        <div>
+          <label for="email" class="block text-sm font-medium text-zinc-700">
+            Email address
+          </label>
+          <div class="mt-1">
+            <input
+              id="email"
+              type="email"
+              formControlName="email"
+              placeholder="Type your mail"
+              class="input-minimal"
+            />
+          </div>
+        </div>
+
+        <div>
+          <label for="password" class="block text-sm font-medium text-zinc-700">
+            Password
+          </label>
+          <div class="mt-1">
+            <input
+              id="password"
+              type="password"
+              formControlName="password"
+              placeholder="••••••••"
+              class="input-minimal"
+            />
+          </div>
+        </div>
+
+        <div>
+          <button type="submit" class="btn-primary w-full">Sign in</button>
+        </div>
+      </form>
+
+      <div class="mt-6">
+        <div class="relative">
+          <div class="absolute inset-0 flex items-center">
+            <div class="w-full border-t border-zinc-200"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
