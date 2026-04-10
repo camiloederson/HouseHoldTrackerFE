@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://your-backend-url.com/api/v1'
+  apiUrl: 'householdtrackerbe-production.up.railway.app/api/v1/'
 };
