@@ -4,6 +4,7 @@
 ### 📄 HouseholdTracker Frontend (`README.md`)
 ```markdown
 # HouseholdTracker Frontend
+## 🪪 Demo: https://householdtracker-v1.netlify.app/
 
 ## 📌 Overview
 This is the frontend for HouseholdTracker — a Progressive Web App (PWA) built with Angular.  
