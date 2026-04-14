@@ -22,6 +22,11 @@ It provides a responsive interface for managing households, budgets, categories,
 - SweetAlert2 notifications
 - Mobile‑friendly PWA functionality
 
+##🔮 Future Improvements
+- Enhanced UI polish
+- Debt control notifications
+- Analytics dashboards
+
 ## 🚀 Setup
 ```bash
 git clone <repo-url>
